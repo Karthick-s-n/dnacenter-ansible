@@ -58,12 +58,13 @@ class DnacBase():
         self.dnac = DNACSDK(params=dnac_params)
         self.dnac_apply = {'exec': self.dnac._exec}
         self.get_diff_state_apply = {'merged': self.get_diff_merged,
+                                     'queried': self.get_diff_queried,
                                      'deleted': self.get_diff_deleted,
                                      'replaced': self.get_diff_replaced,
                                      'overridden': self.get_diff_overridden,
                                      'gathered': self.get_diff_gathered,
                                      'rendered': self.get_diff_rendered,
-                                     'parsed': self.get_diff_parsed
+                                     'parsed': self.get_diff_parsed,
                                      }
         self.verify_diff_state_apply = {'merged': self.verify_diff_merged,
                                         'deleted': self.verify_diff_deleted,
@@ -190,6 +191,11 @@ class DnacBase():
     def get_diff_merged(self):
         # Implement logic to merge the resource configuration
         self.merged = True
+        return self
+    
+    def get_diff_queried(self):
+        # Implement logic to query the resource configuration
+        self.queried = True
         return self
 
     def get_diff_deleted(self):
